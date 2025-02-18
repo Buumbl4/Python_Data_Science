@@ -1,0 +1,2275 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyP3S5x45V97rjQddzj2G/CM",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Buumbl4/Python_Data_Science/blob/main/Python%20para%20Data%20Science%3A%20trabalhando%20com%20fun%C3%A7%C3%B5es%2C%20estruturas%20de%20dados%20e%20exce%C3%A7%C3%B5es\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 1,
+      "metadata": {
+        "id": "6QOv3yMkBjhc",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "e03ecc98-9bf4-438d-b5a9-2717caf7aede"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Requirement already satisfied: matplotlib in /usr/local/lib/python3.11/dist-packages (3.10.0)\n",
+            "Requirement already satisfied: contourpy>=1.0.1 in /usr/local/lib/python3.11/dist-packages (from matplotlib) (1.3.1)\n",
+            "Requirement already satisfied: cycler>=0.10 in /usr/local/lib/python3.11/dist-packages (from matplotlib) (0.12.1)\n",
+            "Requirement already satisfied: fonttools>=4.22.0 in /usr/local/lib/python3.11/dist-packages (from matplotlib) (4.56.0)\n",
+            "Requirement already satisfied: kiwisolver>=1.3.1 in /usr/local/lib/python3.11/dist-packages (from matplotlib) (1.4.8)\n",
+            "Requirement already satisfied: numpy>=1.23 in /usr/local/lib/python3.11/dist-packages (from matplotlib) (1.26.4)\n",
+            "Requirement already satisfied: packaging>=20.0 in /usr/local/lib/python3.11/dist-packages (from matplotlib) (24.2)\n",
+            "Requirement already satisfied: pillow>=8 in /usr/local/lib/python3.11/dist-packages (from matplotlib) (11.1.0)\n",
+            "Requirement already satisfied: pyparsing>=2.3.1 in /usr/local/lib/python3.11/dist-packages (from matplotlib) (3.2.1)\n",
+            "Requirement already satisfied: python-dateutil>=2.7 in /usr/local/lib/python3.11/dist-packages (from matplotlib) (2.8.2)\n",
+            "Requirement already satisfied: six>=1.5 in /usr/local/lib/python3.11/dist-packages (from python-dateutil>=2.7->matplotlib) (1.17.0)\n"
+          ]
+        }
+      ],
+      "source": [
+        "!pip install matplotlib"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!pip install matplotlib==3.6.2"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 512
+        },
+        "id": "EItBi5s1e4X-",
+        "outputId": "9be0dc0b-e53d-4da0-fbb9-ad2f9443c7b2"
+      },
+      "execution_count": 3,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Collecting matplotlib==3.6.2\n",
+            "  Downloading matplotlib-3.6.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.8 kB)\n",
+            "Requirement already satisfied: contourpy>=1.0.1 in /usr/local/lib/python3.11/dist-packages (from matplotlib==3.6.2) (1.3.1)\n",
+            "Requirement already satisfied: cycler>=0.10 in /usr/local/lib/python3.11/dist-packages (from matplotlib==3.6.2) (0.12.1)\n",
+            "Requirement already satisfied: fonttools>=4.22.0 in /usr/local/lib/python3.11/dist-packages (from matplotlib==3.6.2) (4.56.0)\n",
+            "Requirement already satisfied: kiwisolver>=1.0.1 in /usr/local/lib/python3.11/dist-packages (from matplotlib==3.6.2) (1.4.8)\n",
+            "Requirement already satisfied: numpy>=1.19 in /usr/local/lib/python3.11/dist-packages (from matplotlib==3.6.2) (1.26.4)\n",
+            "Requirement already satisfied: packaging>=20.0 in /usr/local/lib/python3.11/dist-packages (from matplotlib==3.6.2) (24.2)\n",
+            "Requirement already satisfied: pillow>=6.2.0 in /usr/local/lib/python3.11/dist-packages (from matplotlib==3.6.2) (11.1.0)\n",
+            "Requirement already satisfied: pyparsing>=2.2.1 in /usr/local/lib/python3.11/dist-packages (from matplotlib==3.6.2) (3.2.1)\n",
+            "Requirement already satisfied: python-dateutil>=2.7 in /usr/local/lib/python3.11/dist-packages (from matplotlib==3.6.2) (2.8.2)\n",
+            "Requirement already satisfied: six>=1.5 in /usr/local/lib/python3.11/dist-packages (from python-dateutil>=2.7->matplotlib==3.6.2) (1.17.0)\n",
+            "Downloading matplotlib-3.6.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (11.8 MB)\n",
+            "\u001b[2K   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m11.8/11.8 MB\u001b[0m \u001b[31m84.0 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hInstalling collected packages: matplotlib\n",
+            "  Attempting uninstall: matplotlib\n",
+            "    Found existing installation: matplotlib 3.10.0\n",
+            "    Uninstalling matplotlib-3.10.0:\n",
+            "      Successfully uninstalled matplotlib-3.10.0\n",
+            "\u001b[31mERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.\n",
+            "plotnine 0.14.5 requires matplotlib>=3.8.0, but you have matplotlib 3.6.2 which is incompatible.\n",
+            "bigframes 1.36.0 requires matplotlib>=3.7.1, but you have matplotlib 3.6.2 which is incompatible.\u001b[0m\u001b[31m\n",
+            "\u001b[0mSuccessfully installed matplotlib-3.6.2\n"
+          ]
+        },
+        {
+          "output_type": "display_data",
+          "data": {
+            "application/vnd.colab-display-data+json": {
+              "pip_warning": {
+                "packages": [
+                  "matplotlib",
+                  "mpl_toolkits"
+                ]
+              },
+              "id": "3f9f2443330e46a8b061a0442c90c9fb"
+            }
+          },
+          "metadata": {}
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import matplotlib"
+      ],
+      "metadata": {
+        "id": "a9iCVE_TfCiF"
+      },
+      "execution_count": 2,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "matplotlib.__version__"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 35
+        },
+        "id": "wFKrRfoagAoG",
+        "outputId": "8ffb9d92-1bba-4157-dcdd-fc21acc970e5"
+      },
+      "execution_count": 4,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "'3.6.2'"
+            ],
+            "application/vnd.google.colaboratory.intrinsic+json": {
+              "type": "string"
+            }
+          },
+          "metadata": {},
+          "execution_count": 4
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import matplotlib.pyplot as plt"
+      ],
+      "metadata": {
+        "id": "X_TcvWaegMnZ"
+      },
+      "execution_count": 5,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "plt.show()"
+      ],
+      "metadata": {
+        "id": "OC4v7cirgrRi"
+      },
+      "execution_count": 6,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!pip list"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "BY0qIKKigvS2",
+        "outputId": "25f67292-e983-407e-f7b4-e56078857d3b"
+      },
+      "execution_count": 7,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Package                            Version\n",
+            "---------------------------------- -------------------\n",
+            "absl-py                            1.4.0\n",
+            "accelerate                         1.3.0\n",
+            "aiohappyeyeballs                   2.4.6\n",
+            "aiohttp                            3.11.12\n",
+            "aiosignal                          1.3.2\n",
+            "alabaster                          1.0.0\n",
+            "albucore                           0.0.23\n",
+            "albumentations                     2.0.4\n",
+            "ale-py                             0.10.1\n",
+            "altair                             5.5.0\n",
+            "annotated-types                    0.7.0\n",
+            "anyio                              3.7.1\n",
+            "argon2-cffi                        23.1.0\n",
+            "argon2-cffi-bindings               21.2.0\n",
+            "array_record                       0.6.0\n",
+            "arviz                              0.20.0\n",
+            "astropy                            7.0.1\n",
+            "astropy-iers-data                  0.2025.2.10.0.33.26\n",
+            "astunparse                         1.6.3\n",
+            "atpublic                           4.1.0\n",
+            "attrs                              25.1.0\n",
+            "audioread                          3.0.1\n",
+            "autograd                           1.7.0\n",
+            "babel                              2.17.0\n",
+            "backcall                           0.2.0\n",
+            "beautifulsoup4                     4.13.3\n",
+            "betterproto                        2.0.0b6\n",
+            "bigframes                          1.36.0\n",
+            "bigquery-magics                    0.5.0\n",
+            "bleach                             6.2.0\n",
+            "blinker                            1.9.0\n",
+            "blis                               0.7.11\n",
+            "blosc2                             3.0.0\n",
+            "bokeh                              3.6.3\n",
+            "Bottleneck                         1.4.2\n",
+            "bqplot                             0.12.44\n",
+            "branca                             0.8.1\n",
+            "CacheControl                       0.14.2\n",
+            "cachetools                         5.5.1\n",
+            "catalogue                          2.0.10\n",
+            "certifi                            2025.1.31\n",
+            "cffi                               1.17.1\n",
+            "chardet                            5.2.0\n",
+            "charset-normalizer                 3.4.1\n",
+            "chex                               0.1.88\n",
+            "clarabel                           0.10.0\n",
+            "click                              8.1.8\n",
+            "cloudpathlib                       0.20.0\n",
+            "cloudpickle                        3.1.1\n",
+            "cmake                              3.31.4\n",
+            "cmdstanpy                          1.2.5\n",
+            "colorcet                           3.1.0\n",
+            "colorlover                         0.3.0\n",
+            "colour                             0.1.5\n",
+            "community                          1.0.0b1\n",
+            "confection                         0.1.5\n",
+            "cons                               0.4.6\n",
+            "contourpy                          1.3.1\n",
+            "cramjam                            2.9.1\n",
+            "cryptography                       43.0.3\n",
+            "cuda-python                        12.6.0\n",
+            "cudf-cu12                          24.12.0\n",
+            "cufflinks                          0.17.3\n",
+            "cupy-cuda12x                       13.3.0\n",
+            "cvxopt                             1.3.2\n",
+            "cvxpy                              1.6.0\n",
+            "cycler                             0.12.1\n",
+            "cyipopt                            1.5.0\n",
+            "cymem                              2.0.11\n",
+            "Cython                             3.0.12\n",
+            "dask                               2024.10.0\n",
+            "datascience                        0.17.6\n",
+            "db-dtypes                          1.4.1\n",
+            "dbus-python                        1.2.18\n",
+            "debugpy                            1.8.0\n",
+            "decorator                          4.4.2\n",
+            "defusedxml                         0.7.1\n",
+            "Deprecated                         1.2.18\n",
+            "diffusers                          0.32.2\n",
+            "distro                             1.9.0\n",
+            "dlib                               19.24.2\n",
+            "dm-tree                            0.1.9\n",
+            "dnspython                          2.7.0\n",
+            "docker-pycreds                     0.4.0\n",
+            "docstring_parser                   0.16\n",
+            "docutils                           0.21.2\n",
+            "dopamine_rl                        4.1.2\n",
+            "duckdb                             1.1.3\n",
+            "earthengine-api                    1.5.2\n",
+            "easydict                           1.13\n",
+            "editdistance                       0.8.1\n",
+            "eerepr                             0.1.0\n",
+            "einops                             0.8.1\n",
+            "email_validator                    2.2.0\n",
+            "en-core-web-sm                     3.7.1\n",
+            "entrypoints                        0.4\n",
+            "et_xmlfile                         2.0.0\n",
+            "etils                              1.12.0\n",
+            "etuples                            0.3.9\n",
+            "Farama-Notifications               0.0.4\n",
+            "fastai                             2.7.18\n",
+            "fastcore                           1.7.29\n",
+            "fastdownload                       0.0.7\n",
+            "fastjsonschema                     2.21.1\n",
+            "fastprogress                       1.0.3\n",
+            "fastrlock                          0.8.3\n",
+            "filelock                           3.17.0\n",
+            "firebase-admin                     6.6.0\n",
+            "Flask                              3.1.0\n",
+            "flatbuffers                        25.2.10\n",
+            "flax                               0.10.3\n",
+            "folium                             0.19.4\n",
+            "fonttools                          4.56.0\n",
+            "frozendict                         2.4.6\n",
+            "frozenlist                         1.5.0\n",
+            "fsspec                             2024.10.0\n",
+            "future                             1.0.0\n",
+            "gast                               0.6.0\n",
+            "gcsfs                              2024.10.0\n",
+            "GDAL                               3.6.4\n",
+            "gdown                              5.2.0\n",
+            "geemap                             0.35.1\n",
+            "gensim                             4.3.3\n",
+            "geocoder                           1.38.1\n",
+            "geographiclib                      2.0\n",
+            "geopandas                          1.0.1\n",
+            "geopy                              2.4.1\n",
+            "gin-config                         0.5.0\n",
+            "gitdb                              4.0.12\n",
+            "GitPython                          3.1.44\n",
+            "glob2                              0.7\n",
+            "google                             2.0.3\n",
+            "google-ai-generativelanguage       0.6.15\n",
+            "google-api-core                    2.19.2\n",
+            "google-api-python-client           2.160.0\n",
+            "google-auth                        2.27.0\n",
+            "google-auth-httplib2               0.2.0\n",
+            "google-auth-oauthlib               1.2.1\n",
+            "google-cloud-aiplatform            1.79.0\n",
+            "google-cloud-bigquery              3.25.0\n",
+            "google-cloud-bigquery-connection   1.17.0\n",
+            "google-cloud-bigquery-storage      2.28.0\n",
+            "google-cloud-bigtable              2.28.1\n",
+            "google-cloud-core                  2.4.1\n",
+            "google-cloud-dataproc              5.16.0\n",
+            "google-cloud-datastore             2.20.2\n",
+            "google-cloud-firestore             2.20.0\n",
+            "google-cloud-functions             1.19.0\n",
+            "google-cloud-iam                   2.17.0\n",
+            "google-cloud-language              2.16.0\n",
+            "google-cloud-pubsub                2.25.0\n",
+            "google-cloud-resource-manager      1.14.0\n",
+            "google-cloud-spanner               3.51.0\n",
+            "google-cloud-storage               2.19.0\n",
+            "google-cloud-translate             3.19.0\n",
+            "google-colab                       1.0.0\n",
+            "google-crc32c                      1.6.0\n",
+            "google-genai                       0.8.0\n",
+            "google-generativeai                0.8.4\n",
+            "google-pasta                       0.2.0\n",
+            "google-resumable-media             2.7.2\n",
+            "google-spark-connect               0.5.2\n",
+            "googleapis-common-protos           1.66.0\n",
+            "googledrivedownloader              1.1.0\n",
+            "graphviz                           0.20.3\n",
+            "greenlet                           3.1.1\n",
+            "grpc-google-iam-v1                 0.14.0\n",
+            "grpc-interceptor                   0.15.4\n",
+            "grpcio                             1.70.0\n",
+            "grpcio-status                      1.62.3\n",
+            "grpclib                            0.4.7\n",
+            "gspread                            6.1.4\n",
+            "gspread-dataframe                  4.0.0\n",
+            "gym                                0.25.2\n",
+            "gym-notices                        0.0.8\n",
+            "gymnasium                          1.0.0\n",
+            "h11                                0.14.0\n",
+            "h2                                 4.2.0\n",
+            "h5netcdf                           1.5.0\n",
+            "h5py                               3.12.1\n",
+            "highspy                            1.9.0\n",
+            "holidays                           0.66\n",
+            "holoviews                          1.20.0\n",
+            "hpack                              4.1.0\n",
+            "html5lib                           1.1\n",
+            "httpcore                           1.0.7\n",
+            "httpimport                         1.4.0\n",
+            "httplib2                           0.22.0\n",
+            "httpx                              0.28.1\n",
+            "huggingface-hub                    0.28.1\n",
+            "humanize                           4.11.0\n",
+            "hyperframe                         6.1.0\n",
+            "hyperopt                           0.2.7\n",
+            "ibis-framework                     9.2.0\n",
+            "id                                 1.5.0\n",
+            "idna                               3.10\n",
+            "imageio                            2.37.0\n",
+            "imageio-ffmpeg                     0.6.0\n",
+            "imagesize                          1.4.1\n",
+            "imbalanced-learn                   0.13.0\n",
+            "imgaug                             0.4.0\n",
+            "immutabledict                      4.2.1\n",
+            "importlib_metadata                 8.6.1\n",
+            "importlib_resources                6.5.2\n",
+            "imutils                            0.5.4\n",
+            "in-toto-attestation                0.9.3\n",
+            "inflect                            7.5.0\n",
+            "iniconfig                          2.0.0\n",
+            "intel-cmplr-lib-ur                 2025.0.4\n",
+            "intel-openmp                       2025.0.4\n",
+            "ipyevents                          2.0.2\n",
+            "ipyfilechooser                     0.6.0\n",
+            "ipykernel                          5.5.6\n",
+            "ipyleaflet                         0.19.2\n",
+            "ipyparallel                        8.8.0\n",
+            "ipython                            7.34.0\n",
+            "ipython-genutils                   0.2.0\n",
+            "ipython-sql                        0.5.0\n",
+            "ipytree                            0.2.2\n",
+            "ipywidgets                         7.7.1\n",
+            "itsdangerous                       2.2.0\n",
+            "jax                                0.4.33\n",
+            "jax-cuda12-pjrt                    0.4.33\n",
+            "jax-cuda12-plugin                  0.4.33\n",
+            "jaxlib                             0.4.33\n",
+            "jeepney                            0.7.1\n",
+            "jellyfish                          1.1.0\n",
+            "jieba                              0.42.1\n",
+            "Jinja2                             3.1.5\n",
+            "jiter                              0.8.2\n",
+            "joblib                             1.4.2\n",
+            "jsonpatch                          1.33\n",
+            "jsonpickle                         4.0.1\n",
+            "jsonpointer                        3.0.0\n",
+            "jsonschema                         4.23.0\n",
+            "jsonschema-specifications          2024.10.1\n",
+            "jupyter-client                     6.1.12\n",
+            "jupyter-console                    6.1.0\n",
+            "jupyter_core                       5.7.2\n",
+            "jupyter-leaflet                    0.19.2\n",
+            "jupyter-server                     1.24.0\n",
+            "jupyterlab_pygments                0.3.0\n",
+            "jupyterlab_widgets                 3.0.13\n",
+            "kaggle                             1.6.17\n",
+            "kagglehub                          0.3.7\n",
+            "keras                              3.8.0\n",
+            "keras-hub                          0.18.1\n",
+            "keras-nlp                          0.18.1\n",
+            "keyring                            23.5.0\n",
+            "kiwisolver                         1.4.8\n",
+            "langchain                          0.3.18\n",
+            "langchain-core                     0.3.35\n",
+            "langchain-text-splitters           0.3.6\n",
+            "langcodes                          3.5.0\n",
+            "langsmith                          0.3.8\n",
+            "language_data                      1.3.0\n",
+            "launchpadlib                       1.10.16\n",
+            "lazr.restfulclient                 0.14.4\n",
+            "lazr.uri                           1.0.6\n",
+            "lazy_loader                        0.4\n",
+            "libclang                           18.1.1\n",
+            "libcudf-cu12                       24.12.0\n",
+            "libkvikio-cu12                     24.12.1\n",
+            "librosa                            0.10.2.post1\n",
+            "lightgbm                           4.5.0\n",
+            "linkify-it-py                      2.0.3\n",
+            "llvmlite                           0.44.0\n",
+            "locket                             1.0.0\n",
+            "logical-unification                0.4.6\n",
+            "lxml                               5.3.1\n",
+            "marisa-trie                        1.2.1\n",
+            "Markdown                           3.7\n",
+            "markdown-it-py                     3.0.0\n",
+            "MarkupSafe                         3.0.2\n",
+            "matplotlib                         3.6.2\n",
+            "matplotlib-inline                  0.1.7\n",
+            "matplotlib-venn                    1.1.1\n",
+            "mdit-py-plugins                    0.4.2\n",
+            "mdurl                              0.1.2\n",
+            "miniKanren                         1.0.3\n",
+            "missingno                          0.5.2\n",
+            "mistune                            3.1.1\n",
+            "mizani                             0.13.1\n",
+            "mkl                                2025.0.1\n",
+            "ml-dtypes                          0.4.1\n",
+            "mlxtend                            0.23.4\n",
+            "model-signing                      0.2.0\n",
+            "more-itertools                     10.6.0\n",
+            "moviepy                            1.0.3\n",
+            "mpmath                             1.3.0\n",
+            "msgpack                            1.1.0\n",
+            "multidict                          6.1.0\n",
+            "multipledispatch                   1.0.0\n",
+            "multitasking                       0.0.11\n",
+            "murmurhash                         1.0.12\n",
+            "music21                            9.3.0\n",
+            "namex                              0.0.8\n",
+            "narwhals                           1.26.0\n",
+            "natsort                            8.4.0\n",
+            "nbclassic                          1.2.0\n",
+            "nbclient                           0.10.2\n",
+            "nbconvert                          7.16.6\n",
+            "nbformat                           5.10.4\n",
+            "ndindex                            1.9.2\n",
+            "nest-asyncio                       1.6.0\n",
+            "networkx                           3.4.2\n",
+            "nibabel                            5.3.2\n",
+            "nltk                               3.9.1\n",
+            "notebook                           6.5.5\n",
+            "notebook_shim                      0.2.4\n",
+            "numba                              0.61.0\n",
+            "numba-cuda                         0.0.17.1\n",
+            "numexpr                            2.10.2\n",
+            "numpy                              1.26.4\n",
+            "nvidia-cublas-cu12                 12.5.3.2\n",
+            "nvidia-cuda-cupti-cu12             12.5.82\n",
+            "nvidia-cuda-nvcc-cu12              12.5.82\n",
+            "nvidia-cuda-nvrtc-cu12             12.5.82\n",
+            "nvidia-cuda-runtime-cu12           12.5.82\n",
+            "nvidia-cudnn-cu12                  9.3.0.75\n",
+            "nvidia-cufft-cu12                  11.2.3.61\n",
+            "nvidia-curand-cu12                 10.3.6.82\n",
+            "nvidia-cusolver-cu12               11.6.3.83\n",
+            "nvidia-cusparse-cu12               12.5.1.3\n",
+            "nvidia-nccl-cu12                   2.21.5\n",
+            "nvidia-nvcomp-cu12                 4.1.0.6\n",
+            "nvidia-nvjitlink-cu12              12.5.82\n",
+            "nvidia-nvtx-cu12                   12.4.127\n",
+            "nvtx                               0.2.10\n",
+            "nx-cugraph-cu12                    24.12.0\n",
+            "oauth2client                       4.1.3\n",
+            "oauthlib                           3.2.2\n",
+            "openai                             1.61.1\n",
+            "opencv-contrib-python              4.11.0.86\n",
+            "opencv-python                      4.11.0.86\n",
+            "opencv-python-headless             4.11.0.86\n",
+            "openpyxl                           3.1.5\n",
+            "opentelemetry-api                  1.16.0\n",
+            "opentelemetry-sdk                  1.16.0\n",
+            "opentelemetry-semantic-conventions 0.37b0\n",
+            "opt_einsum                         3.4.0\n",
+            "optax                              0.2.4\n",
+            "optree                             0.14.0\n",
+            "orbax-checkpoint                   0.6.4\n",
+            "orjson                             3.10.15\n",
+            "osqp                               0.6.7.post3\n",
+            "packaging                          24.2\n",
+            "pandas                             2.2.2\n",
+            "pandas-datareader                  0.10.0\n",
+            "pandas-gbq                         0.26.1\n",
+            "pandas-stubs                       2.2.2.240909\n",
+            "pandocfilters                      1.5.1\n",
+            "panel                              1.6.0\n",
+            "param                              2.2.0\n",
+            "parso                              0.8.4\n",
+            "parsy                              2.1\n",
+            "partd                              1.4.2\n",
+            "pathlib                            1.0.1\n",
+            "patsy                              1.0.1\n",
+            "peewee                             3.17.9\n",
+            "peft                               0.14.0\n",
+            "pexpect                            4.9.0\n",
+            "pickleshare                        0.7.5\n",
+            "pillow                             11.1.0\n",
+            "pip                                24.1.2\n",
+            "platformdirs                       4.3.6\n",
+            "plotly                             5.24.1\n",
+            "plotnine                           0.14.5\n",
+            "pluggy                             1.5.0\n",
+            "ply                                3.11\n",
+            "polars                             1.9.0\n",
+            "pooch                              1.8.2\n",
+            "portpicker                         1.5.2\n",
+            "preshed                            3.0.9\n",
+            "prettytable                        3.14.0\n",
+            "proglog                            0.1.10\n",
+            "progressbar2                       4.5.0\n",
+            "prometheus_client                  0.21.1\n",
+            "promise                            2.3\n",
+            "prompt_toolkit                     3.0.50\n",
+            "propcache                          0.2.1\n",
+            "prophet                            1.1.6\n",
+            "proto-plus                         1.26.0\n",
+            "protobuf                           4.25.6\n",
+            "psutil                             5.9.5\n",
+            "psycopg2                           2.9.10\n",
+            "ptyprocess                         0.7.0\n",
+            "py-cpuinfo                         9.0.0\n",
+            "py4j                               0.10.9.7\n",
+            "pyarrow                            17.0.0\n",
+            "pyasn1                             0.6.1\n",
+            "pyasn1_modules                     0.4.1\n",
+            "pycocotools                        2.0.8\n",
+            "pycparser                          2.22\n",
+            "pydantic                           2.10.6\n",
+            "pydantic_core                      2.27.2\n",
+            "pydata-google-auth                 1.9.1\n",
+            "pydot                              3.0.4\n",
+            "pydotplus                          2.0.2\n",
+            "PyDrive                            1.3.1\n",
+            "PyDrive2                           1.21.3\n",
+            "pyerfa                             2.0.1.5\n",
+            "pygame                             2.6.1\n",
+            "pygit2                             1.17.0\n",
+            "Pygments                           2.18.0\n",
+            "PyGObject                          3.42.1\n",
+            "PyJWT                              2.10.1\n",
+            "pylibcudf-cu12                     24.12.0\n",
+            "pylibcugraph-cu12                  24.12.0\n",
+            "pylibraft-cu12                     24.12.0\n",
+            "pymc                               5.20.1\n",
+            "pymystem3                          0.2.0\n",
+            "pynvjitlink-cu12                   0.5.0\n",
+            "pyogrio                            0.10.0\n",
+            "Pyomo                              6.8.2\n",
+            "PyOpenGL                           3.1.9\n",
+            "pyOpenSSL                          24.2.1\n",
+            "pyparsing                          3.2.1\n",
+            "pyperclip                          1.9.0\n",
+            "pyproj                             3.7.0\n",
+            "pyshp                              2.3.1\n",
+            "PySocks                            1.7.1\n",
+            "pyspark                            3.5.4\n",
+            "pytensor                           2.27.1\n",
+            "pytest                             8.3.4\n",
+            "python-apt                         0.0.0\n",
+            "python-box                         7.3.2\n",
+            "python-dateutil                    2.8.2\n",
+            "python-louvain                     0.16\n",
+            "python-slugify                     8.0.4\n",
+            "python-snappy                      0.7.3\n",
+            "python-utils                       3.9.1\n",
+            "pytz                               2025.1\n",
+            "pyviz_comms                        3.0.4\n",
+            "PyYAML                             6.0.2\n",
+            "pyzmq                              24.0.1\n",
+            "qdldl                              0.1.7.post5\n",
+            "ratelim                            0.1.6\n",
+            "referencing                        0.36.2\n",
+            "regex                              2024.11.6\n",
+            "requests                           2.32.3\n",
+            "requests-oauthlib                  2.0.0\n",
+            "requests-toolbelt                  1.0.0\n",
+            "requirements-parser                0.9.0\n",
+            "rfc3161-client                     0.1.2\n",
+            "rfc8785                            0.1.4\n",
+            "rich                               13.9.4\n",
+            "rmm-cu12                           24.12.1\n",
+            "rpds-py                            0.22.3\n",
+            "rpy2                               3.4.2\n",
+            "rsa                                4.9\n",
+            "safetensors                        0.5.2\n",
+            "scikit-image                       0.25.1\n",
+            "scikit-learn                       1.6.1\n",
+            "scipy                              1.13.1\n",
+            "scooby                             0.10.0\n",
+            "scs                                3.2.7.post2\n",
+            "seaborn                            0.13.2\n",
+            "SecretStorage                      3.3.1\n",
+            "securesystemslib                   1.2.0\n",
+            "Send2Trash                         1.8.3\n",
+            "sentence-transformers              3.4.1\n",
+            "sentencepiece                      0.2.0\n",
+            "sentry-sdk                         2.21.0\n",
+            "setproctitle                       1.3.4\n",
+            "setuptools                         75.1.0\n",
+            "shap                               0.46.0\n",
+            "shapely                            2.0.7\n",
+            "shellingham                        1.5.4\n",
+            "sigstore                           3.6.1\n",
+            "sigstore-protobuf-specs            0.3.2\n",
+            "sigstore-rekor-types               0.0.18\n",
+            "simple-parsing                     0.1.7\n",
+            "simsimd                            6.2.1\n",
+            "six                                1.17.0\n",
+            "sklearn-compat                     0.1.3\n",
+            "sklearn-pandas                     2.2.0\n",
+            "slicer                             0.0.8\n",
+            "smart-open                         7.1.0\n",
+            "smmap                              5.0.2\n",
+            "sniffio                            1.3.1\n",
+            "snowballstemmer                    2.2.0\n",
+            "soundfile                          0.13.1\n",
+            "soupsieve                          2.6\n",
+            "soxr                               0.5.0.post1\n",
+            "spacy                              3.7.5\n",
+            "spacy-legacy                       3.0.12\n",
+            "spacy-loggers                      1.0.5\n",
+            "spanner-graph-notebook             1.0.9\n",
+            "Sphinx                             8.1.3\n",
+            "sphinxcontrib-applehelp            2.0.0\n",
+            "sphinxcontrib-devhelp              2.0.0\n",
+            "sphinxcontrib-htmlhelp             2.1.0\n",
+            "sphinxcontrib-jsmath               1.0.1\n",
+            "sphinxcontrib-qthelp               2.0.0\n",
+            "sphinxcontrib-serializinghtml      2.0.0\n",
+            "SQLAlchemy                         2.0.38\n",
+            "sqlglot                            25.6.1\n",
+            "sqlparse                           0.5.3\n",
+            "srsly                              2.5.1\n",
+            "stanio                             0.5.1\n",
+            "statsmodels                        0.14.4\n",
+            "stringzilla                        3.11.3\n",
+            "sympy                              1.13.1\n",
+            "tables                             3.10.2\n",
+            "tabulate                           0.9.0\n",
+            "tbb                                2022.0.0\n",
+            "tcmlib                             1.2.0\n",
+            "tenacity                           9.0.0\n",
+            "tensorboard                        2.18.0\n",
+            "tensorboard-data-server            0.7.2\n",
+            "tensorflow                         2.18.0\n",
+            "tensorflow-datasets                4.9.7\n",
+            "tensorflow-hub                     0.16.1\n",
+            "tensorflow-io-gcs-filesystem       0.37.1\n",
+            "tensorflow-metadata                1.16.1\n",
+            "tensorflow-probability             0.25.0\n",
+            "tensorflow-text                    2.18.1\n",
+            "tensorstore                        0.1.71\n",
+            "termcolor                          2.5.0\n",
+            "terminado                          0.18.1\n",
+            "text-unidecode                     1.3\n",
+            "textblob                           0.19.0\n",
+            "tf_keras                           2.18.0\n",
+            "tf-slim                            1.1.0\n",
+            "thinc                              8.2.5\n",
+            "threadpoolctl                      3.5.0\n",
+            "tifffile                           2025.1.10\n",
+            "timm                               1.0.14\n",
+            "tinycss2                           1.4.0\n",
+            "tokenizers                         0.21.0\n",
+            "toml                               0.10.2\n",
+            "toolz                              0.12.1\n",
+            "torch                              2.5.1+cu124\n",
+            "torchaudio                         2.5.1+cu124\n",
+            "torchsummary                       1.5.1\n",
+            "torchvision                        0.20.1+cu124\n",
+            "tornado                            6.4.2\n",
+            "tqdm                               4.67.1\n",
+            "traitlets                          5.7.1\n",
+            "traittypes                         0.2.1\n",
+            "transformers                       4.48.3\n",
+            "treescope                          0.1.8\n",
+            "triton                             3.1.0\n",
+            "tuf                                5.1.0\n",
+            "tweepy                             4.15.0\n",
+            "typeguard                          4.4.1\n",
+            "typer                              0.15.1\n",
+            "types-pytz                         2025.1.0.20250204\n",
+            "types-setuptools                   75.8.0.20250210\n",
+            "typing_extensions                  4.12.2\n",
+            "tzdata                             2025.1\n",
+            "tzlocal                            5.2\n",
+            "uc-micro-py                        1.0.3\n",
+            "umf                                0.9.1\n",
+            "uritemplate                        4.1.1\n",
+            "urllib3                            2.3.0\n",
+            "vega-datasets                      0.9.0\n",
+            "wadllib                            1.3.6\n",
+            "wandb                              0.19.6\n",
+            "wasabi                             1.1.3\n",
+            "wcwidth                            0.2.13\n",
+            "weasel                             0.4.1\n",
+            "webcolors                          24.11.1\n",
+            "webencodings                       0.5.1\n",
+            "websocket-client                   1.8.0\n",
+            "websockets                         14.2\n",
+            "Werkzeug                           3.1.3\n",
+            "wheel                              0.45.1\n",
+            "widgetsnbextension                 3.6.10\n",
+            "wordcloud                          1.9.4\n",
+            "wrapt                              1.17.2\n",
+            "xarray                             2025.1.2\n",
+            "xarray-einstats                    0.8.0\n",
+            "xgboost                            2.1.4\n",
+            "xlrd                               2.0.1\n",
+            "xyzservices                        2025.1.0\n",
+            "yarl                               1.18.3\n",
+            "yellowbrick                        1.5\n",
+            "yfinance                           0.2.52\n",
+            "zipp                               3.21.0\n",
+            "zstandard                          0.23.0\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "estudantes = ['João', 'Maria', 'José']\n",
+        "notas = [8.5, 9, 6.5]"
+      ],
+      "metadata": {
+        "id": "rk8HPNyUg_17"
+      },
+      "execution_count": 8,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "plt.bar(x = estudantes, height = notas)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 447
+        },
+        "id": "TWQ7UvgNhx5S",
+        "outputId": "9f7cc9e6-54ec-46d1-f2f3-1ebed5b56c74"
+      },
+      "execution_count": 9,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "<BarContainer object of 3 artists>"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 9
+        },
+        {
+          "output_type": "display_data",
+          "data": {
+            "text/plain": [
+              "<Figure size 640x480 with 1 Axes>"
+            ],
+            "image/png": "iVBORw0KGgoAAAANSUhEUgAAAhYAAAGdCAYAAABO2DpVAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjYuMiwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8o6BhiAAAACXBIWXMAAA9hAAAPYQGoP6dpAAAXoklEQVR4nO3de5CVBf348c+Cumy6C8jF2FiFUcYLWIBgI2jq6IiKhI6aFdUCZiZraCgKzYj59bJeUDE1TEqgBgQrLMbrEA05UiqKqaV5S2QnL3hrF1AXY8/vD8f9ffeLmAc+y7L4es2cP/Y5z+Vzxof1fZ5z9pySQqFQCACABB3aegAAYMchLACANMICAEgjLACANMICAEgjLACANMICAEiz07Y+YFNTU7zyyitRXl4eJSUl2/rwAMAWKBQKsXbt2qisrIwOHTZ/XWKbh8Urr7wSVVVV2/qwAECCurq66N2792bv3+ZhUV5eHhEfDlZRUbGtDw8AbIGGhoaoqqpq/v/45mzzsPjo5Y+KigphAQDtzH97G4M3bwIAaYQFAJBGWAAAaYQFAJBGWAAAaYQFAJBGWAAAaYQFAJBGWAAAaYQFAJBGWAAAaYQFAJBGWAAAaYQFAJBGWAAAaXZq6wFgR9Jnyt1tPQJtbNWVI9t6BGhTrlgAAGmEBQCQRlgAAGmEBQCQRlgAAGmEBQCQRlgAAGmEBQCQRlgAAGmEBQCQRlgAAGmEBQCQRlgAAGmEBQCQRlgAAGmEBQCQRlgAAGmEBQCQZqe2HiBTnyl3t/UItLFVV45s6xEAPtNcsQAA0ggLACCNsAAA0ggLACCNsAAA0ggLACCNsAAA0ggLACCNsAAA0ggLACCNsAAA0ggLACCNsAAA0ggLACCNsAAA0hQVFhs3boyLLroo+vbtG2VlZbH33nvHpZdeGoVCobXmAwDakZ2KWfmqq66KmTNnxty5c6N///7x6KOPxrhx46Jz584xceLE1poRAGgnigqLP//5zzF69OgYOXJkRET06dMnbr/99njkkUdaZTgAoH0p6qWQYcOGxdKlS+O5556LiIgnnngiHnzwwTjuuOM2u01jY2M0NDS0uAEAO6airlhMmTIlGhoaYr/99ouOHTvGxo0b4/LLL48xY8Zsdpva2tq45JJLtnpQAGD7V9QVizvuuCPmzZsX8+fPj5UrV8bcuXNj+vTpMXfu3M1uM3Xq1Kivr2++1dXVbfXQAMD2qagrFpMnT44pU6bE17/+9YiIOPDAA+Pll1+O2traqK6u/thtSktLo7S0dOsnBQC2e0VdsXj33XejQ4eWm3Ts2DGamppShwIA2qeirliMGjUqLr/88thzzz2jf//+8fjjj8d1110X48ePb635AIB2pKiwuPHGG+Oiiy6KCRMmxJo1a6KysjLOPPPMmDZtWmvNBwC0I0WFRXl5ecyYMSNmzJjRSuMAAO2Z7woBANIICwAgjbAAANIICwAgjbAAANIICwAgjbAAANIICwAgjbAAANIICwAgjbAAANIICwAgjbAAANIICwAgjbAAANIICwAgjbAAANIICwAgjbAAANIICwAgjbAAANIICwAgjbAAANIICwAgjbAAANIICwAgjbAAANIICwAgjbAAANIICwAgjbAAANIICwAgjbAAANIICwAgjbAAANIICwAgjbAAANIICwAgjbAAANIICwAgjbAAANIICwAgjbAAANIICwAgjbAAANIICwAgjbAAANIICwAgjbAAANIICwAgjbAAANIICwAgzU5tPQAAefpMubutR6CNrbpyZJse3xULACCNsAAA0ggLACCNsAAA0ggLACCNsAAA0ggLACCNsAAA0ggLACCNsAAA0ggLACCNsAAA0ggLACCNsAAA0hQdFv/617/iW9/6VnTr1i3KysriwAMPjEcffbQ1ZgMA2pmdiln5nXfeieHDh8eRRx4Z9957b/To0SOef/756Nq1a2vNBwC0I0WFxVVXXRVVVVUxe/bs5mV9+/ZNHwoAaJ+Keilk8eLFMWTIkDj11FOjZ8+eMWjQoJg1a9YnbtPY2BgNDQ0tbgDAjqmosPjnP/8ZM2fOjH79+sX9998fZ511VkycODHmzp272W1qa2ujc+fOzbeqqqqtHhoA2D4VFRZNTU0xePDguOKKK2LQoEHxve99L84444y45ZZbNrvN1KlTo76+vvlWV1e31UMDANunosKiV69eccABB7RYtv/++8fq1as3u01paWlUVFS0uAEAO6aiwmL48OHx7LPPtlj23HPPxV577ZU6FADQPhUVFj/84Q/joYceiiuuuCJeeOGFmD9/ftx6661RU1PTWvMBAO1IUWExdOjQuPPOO+P222+PAQMGxKWXXhozZsyIMWPGtNZ8AEA7UtTnWEREnHDCCXHCCSe0xiwAQDvnu0IAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIs1VhceWVV0ZJSUmce+65SeMAAO3ZFofFihUr4mc/+1l88YtfzJwHAGjHtigs1q1bF2PGjIlZs2ZF165dP3HdxsbGaGhoaHEDAHZMWxQWNTU1MXLkyDj66KP/67q1tbXRuXPn5ltVVdWWHBIAaAeKDosFCxbEypUro7a29lOtP3Xq1Kivr2++1dXVFT0kANA+7FTMynV1dXHOOefEkiVLolOnTp9qm9LS0igtLd2i4QCA9qWosHjsscdizZo1MXjw4OZlGzdujAceeCBuuummaGxsjI4dO6YPCQC0D0WFxVFHHRVPPfVUi2Xjxo2L/fbbLy688EJRAQCfcUWFRXl5eQwYMKDFsl133TW6deu2yXIA4LPHJ28CAGmKumLxcZYtW5YwBgCwI3DFAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIIywAgDTCAgBIU1RY1NbWxtChQ6O8vDx69uwZJ554Yjz77LOtNRsA0M4UFRZ/+tOfoqamJh566KFYsmRJfPDBB3HMMcfE+vXrW2s+AKAd2amYle+7774WP8+ZMyd69uwZjz32WHzlK19JHQwAaH+KCov/q76+PiIidt99982u09jYGI2Njc0/NzQ0bM0hAYDt2Ba/ebOpqSnOPffcGD58eAwYMGCz69XW1kbnzp2bb1VVVVt6SABgO7fFYVFTUxN/+9vfYsGCBZ+43tSpU6O+vr75VldXt6WHBAC2c1v0UsjZZ58dd911VzzwwAPRu3fvT1y3tLQ0SktLt2g4AKB9KSosCoVC/OAHP4g777wzli1bFn379m2tuQCAdqiosKipqYn58+fH73//+ygvL4/XXnstIiI6d+4cZWVlrTIgANB+FPUei5kzZ0Z9fX0cccQR0atXr+bbwoULW2s+AKAdKfqlEACAzfFdIQBAGmEBAKQRFgBAGmEBAKQRFgBAGmEBAKQRFgBAGmEBAKQRFgBAGmEBAKQRFgBAGmEBAKQRFgBAGmEBAKQRFgBAGmEBAKQRFgBAGmEBAKQRFgBAGmEBAKQRFgBAGmEBAKQRFgBAGmEBAKQRFgBAGmEBAKQRFgBAGmEBAKQRFgBAGmEBAKQRFgBAGmEBAKQRFgBAGmEBAKQRFgBAGmEBAKQRFgBAGmEBAKQRFgBAGmEBAKQRFgBAGmEBAKQRFgBAGmEBAKQRFgBAGmEBAKQRFgBAGmEBAKQRFgBAGmEBAKQRFgBAGmEBAKQRFgBAGmEBAKQRFgBAGmEBAKQRFgBAGmEBAKQRFgBAGmEBAKQRFgBAGmEBAKQRFgBAGmEBAKQRFgBAGmEBAKQRFgBAmi0Ki5tvvjn69OkTnTp1ii9/+cvxyCOPZM8FALRDRYfFwoULY9KkSXHxxRfHypUr40tf+lKMGDEi1qxZ0xrzAQDtSNFhcd1118UZZ5wR48aNiwMOOCBuueWW+NznPhe33XZba8wHALQjOxWz8oYNG+Kxxx6LqVOnNi/r0KFDHH300fGXv/zlY7dpbGyMxsbG5p/r6+sjIqKhoWFL5v1ETY3vpu+T9qU1zqtiOAdxDtLWWusc/Gi/hULhE9crKizefPPN2LhxY+yxxx4tlu+xxx7xj3/842O3qa2tjUsuuWST5VVVVcUcGj6VzjPaegI+65yDtLXWPgfXrl0bnTt33uz9RYXFlpg6dWpMmjSp+eempqZ4++23o1u3blFSUtLah/9MaWhoiKqqqqirq4uKioq2HofPIOcgbc052HoKhUKsXbs2KisrP3G9osKie/fu0bFjx3j99ddbLH/99dfj85///MduU1paGqWlpS2WdenSpZjDUqSKigr/oGhTzkHamnOwdXzSlYqPFPXmzV122SUOOuigWLp0afOypqamWLp0aRxyyCHFTwgA7FCKfilk0qRJUV1dHUOGDImDDz44ZsyYEevXr49x48a1xnwAQDtSdFicdtpp8cYbb8S0adPitddei4EDB8Z99923yRs62fZKS0vj4osv3uSlJ9hWnIO0Nedg2ysp/Le/GwEA+JR8VwgAkEZYAABphAUAkEZY7CAeeuih6NatW3z3u9+NZ555JkaOHNnWI8Em5syZ43Ns2C6sWrUqLrvssli3bl1bj7LDERbbqbFjx8aJJ574qddfvHhxXHXVVdG9e/c4/vjj48wzz2y94dghjR07NkpKSuL73//+JvfV1NRESUlJjB07dquOcdppp8Vzzz23VfuArdXY2BinnnpqdO/ePXbbbbe2HmeH469CtlNjx46Nf//73/G73/2urUfhM2Ls2LHxxz/+MRoaGuLVV1+NsrKyiIh4//33o1evXlFRURFHHnlkzJkzZ4v2/8EHH8TOO++cODGfBa3xu3DChAnRtWvXuPzyy9P2yf/nikU70NjYGBMnToyePXtGp06d4tBDD40VK1Y0379x48Y4/fTTo2/fvlFWVhb77rtv3HDDDS320dTUFP/zP/8TvXv3jtLS0ubPH4H/bfDgwVFVVRWLFi1qXrZo0aLYc889Y9CgQc3L7rvvvjj00EOjS5cu0a1btzjhhBPixRdfbL5/1apVUVJSEgsXLozDDz88OnXqFPPmzdvkpZAXX3wxRo8eHXvssUfstttuMXTo0PjDH/6wTR4rn10//elPRUUrEhbtwAUXXBC//e1vY+7cubFy5crYZ599YsSIEfH2229HxIfR0Lt37/j1r38dTz/9dEybNi1+9KMfxR133NG8jxtuuCGuvfbamD59ejz55JMxYsSI+OpXvxrPP/98Wz0stlPjx4+P2bNnN/982223bfLJuuvXr49JkybFo48+GkuXLo0OHTrESSedFE1NTS3WmzJlSpxzzjnxzDPPxIgRIzY51rp16+L444+PpUuXxuOPPx7HHntsjBo1KlavXt06D4527b89yXrnnXdizJgx0aNHjygrK4t+/fq1OJfr6uria1/7WnTp0iV23333GD16dKxataoNHskOrsB2qbq6ujB69OjCunXrCjvvvHNh3rx5zfdt2LChUFlZWbj66qs3u31NTU3h5JNPbv65srKycPnll7dYZ+jQoYUJEybkD0+79NE5t2bNmkJpaWlh1apVhVWrVhU6depUeOONNwqjR48uVFdXf+y2b7zxRiEiCk899VShUCgUXnrppUJEFGbMmNFivdmzZxc6d+78iXP079+/cOONN2Y8JHYAH52XhUKhMHHixEJlZWXhnnvuKfz9738vVFdXF7p27Vp46623CoXCh7/3Bg4cWFixYkXhpZdeKixZsqSwePHiQqHw4e/N/fffvzB+/PjCk08+WXj66acL3/zmNwv77rtvobGxsa0e3g6p1b82na3z4osvxgcffBDDhw9vXrbzzjvHwQcfHM8880zzsptvvjluu+22WL16dbz33nuxYcOGGDhwYER8+DXCr7zySot9REQMHz48nnjiiW3yOGg/evToESNHjow5c+ZEoVCIkSNHRvfu3Vus8/zzz8e0adPi4YcfjjfffLP5SsXq1atjwIABzesNGTLkE4+1bt26+PGPfxx33313vPrqq/Gf//wn3nvvPVcs2MT69etj5syZMWfOnDjuuOMiImLWrFmxZMmS+MUvfhGTJ0+O1atXx6BBg5rPuz59+jRvv3Dhwmhqaoqf//znUVJSEhERs2fPji5dusSyZcvimGOO2eaPaUclLHYACxYsiPPPPz+uvfbaOOSQQ6K8vDyuueaaePjhh9t6NNqp8ePHx9lnnx0RH0br/zVq1KjYa6+9YtasWVFZWRlNTU0xYMCA2LBhQ4v1dt111088zvnnnx9LliyJ6dOnxz777BNlZWVxyimnbLIf+DRPss4666w4+eSTY+XKlXHMMcfEiSeeGMOGDYuIiCeeeCJeeOGFKC8vb7Hf999/v8X7g9h6wmI7t/fee8cuu+wSy5cvj7322isiPnx3/YoVK+Lcc8+NiIjly5fHsGHDYsKECc3b/e9/KBUVFVFZWRnLly+Pww8/vHn58uXL4+CDD942D4R25dhjj40NGzZESUnJJu+NeOutt+LZZ5+NWbNmxWGHHRYREQ8++OAWHWf58uUxduzYOOmkkyLiwysYXvNmSx133HHx8ssvxz333BNLliyJo446KmpqamL69Omxbt26OOigg2LevHmbbNejR482mHbHJSy2c7vuumucddZZMXny5Nh9991jzz33jKuvvjrefffdOP300yMiol+/fvHLX/4y7r///ujbt2/86le/ihUrVkTfvn2b9zN58uS4+OKLY++9946BAwfG7Nmz469//evH/iODjh07Nj8L7NixY4v7unbtGt26dYtbb701evXqFatXr44pU6Zs0XH69esXixYtilGjRkVJSUlcdNFFm7wBFCI+3ZOsiA8jobq6Oqqrq+Owww6LyZMnx/Tp02Pw4MGxcOHC6NmzZ1RUVLTRo/hsEBbbqaampthppw//81x55ZXR1NQU3/72t2Pt2rUxZMiQuP/++6Nr164REXHmmWfG448/HqeddlqUlJTEN77xjZgwYULce++9zfubOHFi1NfXx3nnnRdr1qyJAw44IBYvXhz9+vVrk8fH9m9zv3w7dOgQCxYsiIkTJ8aAAQNi3333jZ/85CdxxBFHFH2M6667LsaPHx/Dhg2L7t27x4UXXhgNDQ1bOTk7ok/zJGvatGlx0EEHRf/+/aOxsTHuuuuu2H///SMiYsyYMXHNNdfE6NGjm//0/uWXX45FixbFBRdcEL17927Lh7dD8QFZ26ljjz029tlnn7jpppvaehSANvOd73wn3n333fjNb34T77//flxwwQVx++23Nz/Juv7662Po0KEREXHZZZfF/PnzY9WqVVFWVhaHHXZYXH/99c1Xb1977bW48MIL45577om1a9fGF77whTjqqKNi+vTprmIkEhbbmXfeeSeWL18ep5xySixYsKCoj/UG2NF4ktX+eClkOzN+/PhYsWJFnHfeeTF69Oi2HgegTXz0JGvZsmUf+/01bL9csQBgu3PSSSfFihUrorq6Oi677LLmz55g+ycsAIA0visEAEgjLACANMICAEgjLACANMICAEgjLACANMICAEgjLACANP8PtnEi5lVnIDYAAAAASUVORK5CYII=\n"
+          },
+          "metadata": {}
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "estudantes_2 = ['João', 'Maria', 'José', 'Ana']"
+      ],
+      "metadata": {
+        "id": "m_JXHtV7h83X"
+      },
+      "execution_count": 10,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from random import choice"
+      ],
+      "metadata": {
+        "id": "-bBYxAv-iMRY"
+      },
+      "execution_count": 11,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "estudante = choice(estudantes_2)\n",
+        "estudante"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 35
+        },
+        "id": "_azoJTUJiW94",
+        "outputId": "9b4ea61e-729f-4e25-d5bb-78b8ba801db9"
+      },
+      "execution_count": 12,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "'Maria'"
+            ],
+            "application/vnd.google.colaboratory.intrinsic+json": {
+              "type": "string"
+            }
+          },
+          "metadata": {},
+          "execution_count": 12
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "estudante = choice(estudantes_2)\n",
+        "estudante"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 35
+        },
+        "id": "2fgVvNbAibVr",
+        "outputId": "9869dee8-dfcf-4485-f0b8-bce2a0d0a0e8"
+      },
+      "execution_count": 13,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "'Maria'"
+            ],
+            "application/vnd.google.colaboratory.intrinsic+json": {
+              "type": "string"
+            }
+          },
+          "metadata": {},
+          "execution_count": 13
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "estudante = choice(estudantes_2)\n",
+        "estudante"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 35
+        },
+        "id": "oZI3JPZDifY3",
+        "outputId": "9f5cda41-5b9f-4a30-8e47-141fe642ae49"
+      },
+      "execution_count": 14,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "'João'"
+            ],
+            "application/vnd.google.colaboratory.intrinsic+json": {
+              "type": "string"
+            }
+          },
+          "metadata": {},
+          "execution_count": 14
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from random import randrange, sample\n",
+        "\n",
+        "lista = []\n",
+        "\n",
+        "for i in range(0, 20):\n",
+        "  lista.append(randrange(100))\n",
+        "\n",
+        "sample(lista, 5)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "5mxv2LPFigsK",
+        "outputId": "c5c19b86-03d0-46f8-d1d2-0e97d4d34a7c"
+      },
+      "execution_count": 15,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "[58, 32, 2, 85, 8]"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 15
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "help(randrange)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "fMV7zpILjA0Z",
+        "outputId": "1193f58e-4b97-49ec-db64-1f64de1820c5"
+      },
+      "execution_count": 16,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Help on method randrange in module random:\n",
+            "\n",
+            "randrange(start, stop=None, step=1) method of random.Random instance\n",
+            "    Choose a random item from range(stop) or range(start, stop[, step]).\n",
+            "    \n",
+            "    Roughly equivalent to ``choice(range(start, stop, step))`` but\n",
+            "    supports arbitrarily large ranges and is optimized for common cases.\n",
+            "\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from math import ceil\n",
+        "receita = 1000\n",
+        "unidade = 15\n",
+        "\n",
+        "print(f'A empresa vendeu o total de {ceil(receita/unidade)} itens')"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "xU1uFQlBjGuE",
+        "outputId": "cb353518-687e-45ff-a166-3d59569b8e19"
+      },
+      "execution_count": 18,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "A empresa vendeu o total de 67 itens\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import numpy as np"
+      ],
+      "metadata": {
+        "id": "r4KY-g0Blaav"
+      },
+      "execution_count": 19,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "lista = [8,12,54,23,43,1,90,87,105,77]"
+      ],
+      "metadata": {
+        "id": "1WcdI_n7lh0n"
+      },
+      "execution_count": 20,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from random import randrange\n",
+        "\n",
+        "print(f'O número selecionado foi: {randrange(100)}')"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "ty8VEEg8lmjA",
+        "outputId": "7ff1b62e-3919-48ed-cf81-b3e81b36f4f6"
+      },
+      "execution_count": 22,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "O número selecionado foi: 98\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from math import pow\n",
+        "\n",
+        "x = int(input('Digite um número inteiro:'))\n",
+        "y = int(input('Digite outro número inteiro:'))\n",
+        "\n",
+        "print(f'A potência do 1º número elevado ao 2º número é igual a {pow(x,y)}')"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "MzXYibGil4FT",
+        "outputId": "538b148d-3472-415d-ab22-010bb6dcb9cb"
+      },
+      "execution_count": 23,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Digite um número inteiro:2\n",
+            "Digite outro número inteiro:8\n",
+            "A potência do 1º número elevado ao 2º número é igual a 256.0\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from random import randrange\n",
+        "\n",
+        "part = int(input('Digite o número de participantes do sorteio:'))\n",
+        "\n",
+        "print(f'O número do participante sorteado foi:{randrange(part+1)}')"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "gX4_RL8DmaWM",
+        "outputId": "2abfe910-132b-42a1-840f-c5219d558328"
+      },
+      "execution_count": 25,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Digite o número de participantes do sorteio:500\n",
+            "O número do participante sorteado foi:67\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from random import randrange\n",
+        "\n",
+        "nome = input('Digite o seu nome:')\n",
+        "token = 1\n",
+        "while token%2 != 0:\n",
+        "  token = randrange(1000,9998)\n",
+        "\n",
+        "print(f'Olá, {nome}, o seu token de acesso é o {token}! Seja bem-vindo(a)!')"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "CM67uRbym02M",
+        "outputId": "3ecd1e27-4c27-49c2-f164-1a58add91c4e"
+      },
+      "execution_count": 26,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Digite o seu nome:Luis\n",
+            "Olá, Luis, o seu token de acesso é o 4586! Seja bem-vindo(a)!\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from random import sample\n",
+        "\n",
+        "frutas = [\"maçã\", \"banana\", \"uva\", \"pêra\",\n",
+        "          \"manga\", \"coco\", \"melancia\", \"mamão\",\n",
+        "          \"laranja\", \"abacaxi\", \"kiwi\", \"ameixa\"]\n",
+        "\n",
+        "print(f'Sua salada de fruta aleatória contera as seguintes frutas: {sample(frutas, 3)}. Bom Apetite e Volte Semrpe! :)')"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "8pkT72LTnwmt",
+        "outputId": "e8303bcd-e6ed-43ce-d600-1b288d2b85ad"
+      },
+      "execution_count": 2,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Sua salada de fruta aleatória contera as seguintes frutas: ['laranja', 'banana', 'mamão']. Bom Apetite e Volte Semrpe! :)\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from math import sqrt\n",
+        "\n",
+        "numeros = [2, 8, 15, 23, 91, 112, 256]\n",
+        "# iniciando uma lista vazia para receber as raízes\n",
+        "raiz = []\n",
+        "\n",
+        "# laço for para calcular cada raiz da lista de números e adicionar a lista raiz\n",
+        "for numero in numeros:\n",
+        "  raiz.append(sqrt(numero))\n",
+        "\n",
+        "# laço for para ler a lista raiz e exibir um texto só quando a raiz for um valor inteiro\n",
+        "for i in range(len(raiz)):\n",
+        "  # condição para testar se um número é inteiro (Ex: 2.5 // 1 = 2 ... 2 != 2.5)\n",
+        "  if raiz[i] // 1 == raiz[i]:\n",
+        "    print(f\"O número {numeros[i]} possui raiz quadrada inteira igual a {int(raiz[i])}\")\n",
+        "\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "OJ7GF74LM7-r",
+        "outputId": "5f3c0b12-2d7d-4090-8dfc-5d7874cc34b9"
+      },
+      "execution_count": 15,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "O número 256 possui raiz quadrada inteira igual a 16\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from math import pow, pi\n",
+        "\n",
+        "preco_metro = 25\n",
+        "\n",
+        "raio = int(input('Qual o raio da área que deseja preencher com grama:'))\n",
+        "area = pi*pow(raio, 2)\n",
+        "valor_final = area*preco_metro\n",
+        "\n",
+        "print(f'O total gasto para cobrir de grama a area de {area}m², sera de: R${valor_final}')"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "E_vtIzktN9et",
+        "outputId": "a10c2b3c-d44c-48ae-cb58-1a7e05837b7f"
+      },
+      "execution_count": 13,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Qual o raio da área que deseja preencher com grama:20\n",
+            "O total gasto para cobrir de grama a area de 1256.6370614359173m², sera de: R$31415.926535897932\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "notas = {'1º Trimeste':8.5, '2º Trimeste':9.5, '3º trimestre':7}\n",
+        "notas"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "0gJULKeMVMe7",
+        "outputId": "af9ae759-23cd-4d92-9533-281c556826f8"
+      },
+      "execution_count": 16,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "{'1º Trimeste': 8.5, '2º Trimeste': 9.5, '3º trimestre': 7}"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 16
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "soma = sum(notas.values())\n",
+        "soma"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "UcMRnkHGXqrj",
+        "outputId": "57f2b796-143f-4fcb-d6cc-1befcb028678"
+      },
+      "execution_count": 21,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "25.0"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 21
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "trimestres = len(notas.values())\n",
+        "trimestres"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "uXzC_HJvXteQ",
+        "outputId": "f1846f0c-dda5-4e3c-e5e3-90ef1ec65207"
+      },
+      "execution_count": 22,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "3"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 22
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "media = soma/trimestres\n",
+        "media"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "sMCT8naPXzd7",
+        "outputId": "61018522-4bb0-4f0f-be6e-e85704a4aa81"
+      },
+      "execution_count": 24,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "8.333333333333334"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 24
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "help(round)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "wi31I9IoX5A8",
+        "outputId": "e1414275-d6ee-4002-d9e9-a885edab243d"
+      },
+      "execution_count": 25,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Help on built-in function round in module builtins:\n",
+            "\n",
+            "round(number, ndigits=None)\n",
+            "    Round a number to a given precision in decimal digits.\n",
+            "    \n",
+            "    The return value is an integer if ndigits is omitted or None.  Otherwise\n",
+            "    the return value has the same type as the number.  ndigits may be negative.\n",
+            "\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "media_ar = round(media, 1)\n",
+        "media_ar"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "bT-m9GVcaTZi",
+        "outputId": "dd46fb0c-65f8-4800-814d-db973edc407a"
+      },
+      "execution_count": 27,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "8.3"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 27
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "#Funções#"
+      ],
+      "metadata": {
+        "id": "p1Q_oANftIKP"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Para criação de um parâmentro, usamos a função 'def'. Onde possui como sintaxe:\n",
+        "def <nome>():\n",
+        "  <instruções>\n",
+        "\n",
+        "Ao executarmos o comando, será criado um parâmentro com as orientações passadas.\n",
+        "\n",
+        "Ex:\n",
+        "\n",
+        "```\n",
+        "def media():\n",
+        "  media = (10+8+9)/3\n",
+        "  print(media)\n",
+        "```\n",
+        "\n",
+        "Desta forma, criamos o parâmetro 'media()'.\n",
+        "\n",
+        "Mas, não necessariamente vamos indicar os números, podemos indicar as condições e na execução indicarmos o argumento que vai ser utilizado.\n",
+        "\n",
+        "Ex:\n",
+        "\n",
+        "**def media(nota1, nota2, nota3):\n",
+        "  media = (nota1 + nota2 + nota3)/3\n",
+        "  print(media)**\n",
+        "\n",
+        "```\n",
+        "def media(nota1, nota2, nota3):\n",
+        "  media = (nota1 + nota2 + nota3)/3\n",
+        "  print(media)\n",
+        "\n",
+        "```\n",
+        "`media(6,8,10)`\n",
+        "\n",
+        "Será exibido o resultado: **8**"
+      ],
+      "metadata": {
+        "id": "PL7r9Jr1gOod"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "notas = [8.5, 9.0, 6.0, 10.0]\n",
+        "\n",
+        "def media(lista):\n",
+        "  calculo = sum(lista)/len(lista)\n",
+        "  return round(calculo, 1)"
+      ],
+      "metadata": {
+        "id": "HTd_iO2taZOJ"
+      },
+      "execution_count": 38,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "media(notas)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "S39OjGuRj6Y2",
+        "outputId": "3dd562ce-6891-4a93-e3be-5639fc8889fc"
+      },
+      "execution_count": 39,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "8.4"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 39
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "resultado = media(notas)\n",
+        "resultado"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "1RnsdzaPkEE3",
+        "outputId": "eb8878e2-4e3f-4a87-a459-8bafa38187b9"
+      },
+      "execution_count": 40,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "8.4"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 40
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "notas = [6.0, 7.0, 9.0, 5.0]"
+      ],
+      "metadata": {
+        "id": "CiqFzZVfoaug"
+      },
+      "execution_count": 51,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def media(lista):\n",
+        "  situacao = ''\n",
+        "  calculo = round(sum(lista)/len(lista), 2)\n",
+        "  if calculo >= 6:\n",
+        "    situacao = 'Aprovado'\n",
+        "  else:\n",
+        "    situacao = 'Reprovado'\n",
+        "  return calculo, situacao"
+      ],
+      "metadata": {
+        "id": "2mprekHEpBjy"
+      },
+      "execution_count": 69,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "media()"
+      ],
+      "metadata": {
+        "id": "-ceYaCYWq0rf"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "media(notas)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "VjCRmsgZpCAt",
+        "outputId": "7b658e6e-9b5a-44bb-8b1e-1a48b46ca4fc"
+      },
+      "execution_count": 70,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "(6.75, 'Aprovado')"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 70
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "nota_media, situacao = media(notas)"
+      ],
+      "metadata": {
+        "id": "ll2ycu3kpLga"
+      },
+      "execution_count": 71,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "nota_media"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "UwHTdV_hqOjS",
+        "outputId": "4edec3ef-8e6c-40b5-e28f-7a56397c6fcd"
+      },
+      "execution_count": 72,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "6.75"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 72
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "situacao"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 35
+        },
+        "id": "OWIVKPswqPTY",
+        "outputId": "60cdbd7d-40ce-4241-febd-2523e435a9d3"
+      },
+      "execution_count": 73,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "'Aprovado'"
+            ],
+            "application/vnd.google.colaboratory.intrinsic+json": {
+              "type": "string"
+            }
+          },
+          "metadata": {},
+          "execution_count": 73
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(f'O(a) estudante atingiu uma média de {nota_media}, estando {situacao}')"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "qXQxY7AOqQQV",
+        "outputId": "a4734dcd-24b5-4041-cddc-b1eabafe4e72"
+      },
+      "execution_count": 74,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "O(a) estudante atingiu uma média de 6.75, estando Aprovado\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "#Função Lambda#"
+      ],
+      "metadata": {
+        "id": "saZ9PuRNs7On"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "##Função Padrão:##\n",
+        "\n",
+        "\n",
+        "```\n",
+        "nota = float(input(\"Digite a nota do(a) estudante: \"))\n",
+        "\n",
+        "def qualitativo(x):\n",
+        "  return x+0.5\n",
+        "\n",
+        "qualitativo(nota)\n",
+        "```\n",
+        "Mantendo a mesma linha de racíocinio mas, procurando utilizar a função lambda, teremos o seguinte resultado para criação da função:\n",
+        "\n",
+        "\n",
+        "\n",
+        "```\n",
+        "nota = float(input('Digite a nota do(a) estudante: '))\n",
+        "\n",
+        "qualitativo = lambda x: x + 0.5\n",
+        "\n",
+        "qualitativo(nota)\n",
+        "```\n",
+        "\n",
+        "Funções lambda são usadas para criar funções simples e de uso único, que geralmente são passadas como argumentos para outras funções ou usadas em situações onde a definição de uma função completa seria excessiva.\n"
+      ],
+      "metadata": {
+        "id": "3Fg4_ezktiVv"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "n1 = float(input('Digite a 1ª nota do(a) estudante:'))\n",
+        "n2 = float(input('Digite a 2ª nota do(a) estudante:'))\n",
+        "n3 = float(input('Digite a 3ª nota do(a) estudante:'))\n",
+        "notas = [n1*3, n2*2, n3*5]\n",
+        "\n",
+        "media = lambda lista: sum(lista)/10\n",
+        "\n",
+        "media_final = round(media(notas), 2)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "IB-5253RqeY8",
+        "outputId": "2c68b823-d683-4c4d-c653-44c07ad52583"
+      },
+      "execution_count": 87,
+      "outputs": [
+        {
+          "name": "stdout",
+          "output_type": "stream",
+          "text": [
+            "Digite a 1ª nota do(a) estudante:8\n",
+            "Digite a 2ª nota do(a) estudante:5\n",
+            "Digite a 3ª nota do(a) estudante:9\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(f'O(a) estudante atiingiu uma média de {media_final}')"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "CJXU7BNLybKs",
+        "outputId": "781b49dd-c307-489d-8f2d-58ace438df38"
+      },
+      "execution_count": 88,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "O(a) estudante atiingiu uma média de 7.9\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def leitura(lista):\n",
+        "  tamanho_lista = len(lista)\n",
+        "  maior = 0\n",
+        "  for elemento in lista:\n",
+        "    if elemento > maior:\n",
+        "      maior = elemento\n",
+        "      menor = maior\n",
+        "    if elemento < menor:\n",
+        "      menor = elemento\n",
+        "  soma = sum(lista)\n",
+        "\n",
+        "  return tamanho_lista, maior, menor, soma"
+      ],
+      "metadata": {
+        "id": "xZJ-87CvypLg"
+      },
+      "execution_count": 100,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "lista = [16, 14, 63, 65, 17, 99, 70, 11, 20, 48, 79, 32, 17, 89, 12, 25, 66]"
+      ],
+      "metadata": {
+        "id": "d_ppv3xXEKPW"
+      },
+      "execution_count": 101,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "tam, maior, menor, soma = leitura(lista)"
+      ],
+      "metadata": {
+        "id": "14MEbsLjEOZM"
+      },
+      "execution_count": 103,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(f'A lista possui {tam} números em que o maior número é {maior} e o menor número é {menor}. A soma dos valores presentes nela é igual a {soma}')"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "7gYmIv8qEPzH",
+        "outputId": "43b1e730-6cef-4ac5-8a85-886bc16be2a1"
+      },
+      "execution_count": 104,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "A lista possui 17 números em que o maior número é 99 e o menor número é 11. A soma dos valores presentes nela é igual a 743\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "num = int(input('Digite um número:'))\n",
+        "\n",
+        "for n in range(0,11):\n",
+        "  print(f'{num} x {n} = {num*n}')"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "Dl4IQr9YFJYn",
+        "outputId": "2560edb1-654f-40b2-d7d7-e3bdcc144b0b"
+      },
+      "execution_count": 105,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Digite um número:5\n",
+            "5 x 0 = 0\n",
+            "5 x 1 = 5\n",
+            "5 x 2 = 10\n",
+            "5 x 3 = 15\n",
+            "5 x 4 = 20\n",
+            "5 x 5 = 25\n",
+            "5 x 6 = 30\n",
+            "5 x 7 = 35\n",
+            "5 x 8 = 40\n",
+            "5 x 9 = 45\n",
+            "5 x 10 = 50\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "lista = [97, 80, 94, 88, 80, 1, 16, 53, 62, 32, 24, 99]"
+      ],
+      "metadata": {
+        "id": "M5XcQ7eHFmfj"
+      },
+      "execution_count": 108,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def mult3(lista):\n",
+        "  mult_3 = []\n",
+        "\n",
+        "  for elemento in lista:\n",
+        "    if elemento%3 == 0:\n",
+        "      mult_3.append(elemento)\n",
+        "  return mult_3"
+      ],
+      "metadata": {
+        "id": "TOhYD_gdFtu4"
+      },
+      "execution_count": 109,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "mult_3 = mult3(lista)\n",
+        "mult_3"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "2eSnAlFeGZYh",
+        "outputId": "35abaf9f-63c9-4a39-d1d6-6141b0c4ce87"
+      },
+      "execution_count": 110,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "[24, 99]"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 110
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "lista = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\n",
+        "quadrado = list(map(lambda x: x**2, lista))\n",
+        "quadrado"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "dzprnSwPGdla",
+        "outputId": "f35520ec-56a3-43bb-9d77-e08e4bf26528"
+      },
+      "execution_count": 112,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 112
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "n1 = float(input('Digite a 1ª nota do(a) Skatista:'))\n",
+        "n2 = float(input('Digite a 2ª nota do(a) Skatista:'))\n",
+        "n3 = float(input('Digite a 3ª nota do(a) Skatista:'))\n",
+        "n4 = float(input('Digite a 4ª nota do(a) Skatista:'))\n",
+        "n5 = float(input('Digite a 5ª nota do(a) Skatista:'))\n",
+        "notas = [n1,n2,n3,n4,n5]\n",
+        "maior = 0\n",
+        "menor = 10\n",
+        "\n",
+        "for nota in notas:\n",
+        "  if nota > maior:\n",
+        "    maior = nota\n",
+        "  if nota < menor:\n",
+        "    menor = nota\n",
+        "\n",
+        "notas.remove(maior)\n",
+        "notas.remove(menor)\n",
+        "\n",
+        "media = round(sum(notas)/len(notas), 1)\n",
+        "\n",
+        "print(f'Nota da manobra: {media}')"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "QMp4RH_1HOpk",
+        "outputId": "75e22a18-334d-467e-c380-608fd0b3d70d"
+      },
+      "execution_count": 115,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Digite a 1ª nota do(a) estudante:10\n",
+            "Digite a 2ª nota do(a) estudante:8\n",
+            "Digite a 3ª nota do(a) estudante:9\n",
+            "Digite a 4ª nota do(a) estudante:8\n",
+            "Digite a 5ª nota do(a) estudante:9.5\n",
+            "Nota da manobra: 8.8\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def aprovacao(lista):\n",
+        "  maior = 0\n",
+        "  for elemento in lista:\n",
+        "    if elemento > maior:\n",
+        "      maior = elemento\n",
+        "      menor = maior\n",
+        "    if elemento < menor:\n",
+        "      menor = elemento\n",
+        "  media = round(sum(lista)/len(lista), 1)\n",
+        "  if media >= 6:\n",
+        "    situacao = 'Aprovado'\n",
+        "  else:\n",
+        "    situacao = 'Reprovado'\n",
+        "\n",
+        "  return maior, menor, media, situacao"
+      ],
+      "metadata": {
+        "id": "oQ24EKonJAcA"
+      },
+      "execution_count": 116,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "n1 = float(input('Digite a 1ª nota do(a) estudante:'))\n",
+        "n2 = float(input('Digite a 2ª nota do(a) estudante:'))\n",
+        "n3 = float(input('Digite a 3ª nota do(a) estudante:'))\n",
+        "\n",
+        "notas = [n1,n2,n3]\n",
+        "\n",
+        "maior, menor, media, situacao = aprovacao(notas)\n",
+        "\n",
+        "print(f\"O(a) estudante obteve uma média de {media}, com a sua maior nota de {maior} pontos e a menor nota de {menor} pontos e foi {situacao}\")"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "sGCWzhkyKQAy",
+        "outputId": "3887e9bf-57d2-4c2f-bde0-f4668ecf6f43"
+      },
+      "execution_count": 117,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Digite a 1ª nota do(a) estudante:8\n",
+            "Digite a 2ª nota do(a) estudante:5\n",
+            "Digite a 3ª nota do(a) estudante:7\n",
+            "O(a) estudante obteve uma média de 6.7, com a sua maior nota de 8.0 pontos e a menor nota de 5.0 pontos e foi Aprovado\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "nomes = [\"joão\", \"MaRia\", \"JOSÉ\"]\n",
+        "sobrenomes = [\"SILVA\", \"souza\", \"Tavares\"]\n",
+        "\n",
+        "nome_completo = map(lambda nome, sobrenome: f'{nome.title()} {sobrenome.title()}', nomes, sobrenomes)\n",
+        "\n",
+        "for n in nome_completo:\n",
+        "  print(f'Nome completo: {n}')"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "T1J1fspALDeB",
+        "outputId": "314d4d09-ea40-42a4-efcc-c0f70cd26cb4"
+      },
+      "execution_count": 121,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Nome completo: João Silva\n",
+            "Nome completo: Maria Souza\n",
+            "Nome completo: José Tavares\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "gols_marcados = [2, 2, 3, 1, 0]\n",
+        "gols_sofridos = [1, 2, 2, 1, 3]\n",
+        "\n",
+        "def calcula_pontos(gols_marcados, gols_sofridos):\n",
+        "  pontos = 0\n",
+        "  for i in range(len(gols_marcados)):\n",
+        "    if gols_marcados[i] > gols_sofridos[i]:\n",
+        "      pontos += 3\n",
+        "    elif gols_marcados[i] == gols_sofridos[i]:\n",
+        "      pontos += 1\n",
+        "  aproveitamento = 100*pontos/(len(gols_marcados)*3)\n",
+        "  return (pontos, aproveitamento)\n",
+        "\n",
+        "pontos, aprov = calcula_pontos(gols_marcados, gols_sofridos)\n",
+        "print(f\"A pontuação do time foi de {pontos} e seu aproveitamento foi de {round(aprov)}%\")"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "uO8XJnr4QWAB",
+        "outputId": "901a44f6-c161-449c-f129-eddc70a4c167"
+      },
+      "execution_count": 130,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "A pontuação do time foi de 8 e seu aproveitamento foi de 53%\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "dias = int(input(\"Quantas diárias? \"))\n",
+        "cidade = input(\"Qual a cidade? [Salvador, Fortaleza, Natal ou Aracaju]: \")\n",
+        "distancias = [850, 800, 300, 550]\n",
+        "passeio = [200, 400, 250, 300]\n",
+        "km_l = 14\n",
+        "gasolina = 5\n",
+        "\n",
+        "def gasto_hotel(dias):\n",
+        "    return 150 * dias\n",
+        "\n",
+        "def gasto_gasolina(cidade):\n",
+        "    if cidade == \"Salvador\":\n",
+        "        return (2 * distancias[0] * gasolina) / km_l\n",
+        "    elif cidade == \"Fortaleza\":\n",
+        "        return (2 * distancias[1] * gasolina) / km_l\n",
+        "    elif cidade == \"Natal\":\n",
+        "        return (2 * distancias[2] * gasolina) / km_l\n",
+        "    elif cidade == \"Aracaju\":\n",
+        "        return (2 * distancias[3] * gasolina) / km_l\n",
+        "\n",
+        "def gasto_passeio(cidade, dias):\n",
+        "    if cidade==\"Salvador\":\n",
+        "        return passeio[0] * dias\n",
+        "    elif cidade==\"Fortaleza\":\n",
+        "        return passeio[1] * dias\n",
+        "    elif cidade==\"Natal\":\n",
+        "        return passeio[2] * dias\n",
+        "    elif cidade==\"Aracaju\":\n",
+        "        return passeio[3] * dias\n",
+        "\n",
+        "gastos = gasto_hotel(dias) + gasto_gasolina(cidade) + gasto_passeio(cidade, dias)\n",
+        "print(f\"Com base nos gastos definidos, uma viagem de {dias} dias para {cidade} saindo de Recife custaria {round(gastos, 2)} reais\")\n",
+        "\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "gQHNB6o9QvCz",
+        "outputId": "b32f42ba-0563-4a52-b625-b9bb7c9a6066"
+      },
+      "execution_count": 131,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Quantas diárias? 6\n",
+            "Qual a cidade? [Salvador, Fortaleza, Natal ou Aracaju]: Fortaleza\n",
+            "Com base nos gastos definidos, uma viagem de 6 dias para Fortaleza saindo de Recife custaria 3871.43 reais\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "frase = input(\"Digite uma frase: \")\n",
+        "frase = frase.replace(',',' ').replace('.',' ').replace('!',' ').replace('?',' ').split()\n",
+        "\n",
+        "tamanho = list(filter(lambda x: len(x) >= 5, frase))\n",
+        "print(tamanho)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "upRITvD4XP3J",
+        "outputId": "5c009f1a-4a4e-4463-cdc1-84abeba3a5e8"
+      },
+      "execution_count": 133,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Digite uma frase: Aprender Python aqui na Alura é muito bom\n",
+            "['Aprender', 'Python', 'Alura', 'muito']\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "\n"
+      ],
+      "metadata": {
+        "id": "Am5AqrKKXmvm"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
